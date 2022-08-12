@@ -1,29 +1,46 @@
 import React from 'react'
 import Image from "next/image"
 import {
-    BellICon,
+    BellIcon,
     ChatIcon,
-    ChevronDownICon,
+    ChevronDownIcon,
     HomeIcon,
-    UserGroupICon,
+    UserGroupIcon,
     ViewGridIcon
 } from "@heroicons/react/solid"
 import {
     FlagIcon,
     PlayIcon,
     SearchIcon,
-    ShoppingCartICon
+    ShoppingCartIcon
 } from "@heroicons/react/outline"
+import HeaderIcon from "./HeaderIcon"
 function Header() {
   return (
-    <div>
+    <div className="sticky  top-0 z-50 bg-white flex items-center p-2 lg:px-5 shadow-md">
         <div className="flex items-center   ">
 
             <Image src="https://links.papareact.com/5me" width={40} height={40} layouts="fixed"/>
-            <div className="flex ">
-            <SearchIcon className="h-6"/>
-                <input type="text" placeholder="Search facebook"/>
+            <div className="flex ml-2 items-center rounded-full bg-gray-100 p-2">
+            <SearchIcon className="h-6 text-gray-600"/>
+                <input type="text" className="hidden md:inline ml-2 items-center bg-transparent outline-none placeholder-gray-500 flex-shrink" placeholder="Search facebook"/>
             </div>
+        </div>
+        <div className="flex justify-center flex-grow">
+            <div className="flex space-x-6 md:space-x-2">
+                <HeaderIcon active Icon={HomeIcon}/>
+                <HeaderIcon Icon={FlagIcon}/>
+                <HeaderIcon Icon={PlayIcon}/>
+                <HeaderIcon Icon={ShoppingCartIcon}/>
+                <HeaderIcon Icon={UserGroupIcon}/>
+            </div>
+        </div>
+        <div className="flex items-center sm:space-x-2 justify-end">
+            <p className="whitespace-nowrap font-semibold pr-3">Asante Bruce</p>
+            <ViewGridIcon className="icon"/>
+            <ChatIcon className="icon"/>
+            <BellIcon className="icon"/>
+            <ChevronDownIcon className="icon"/>
         </div>
     </div>
   )

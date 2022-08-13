@@ -16,7 +16,7 @@ const Home: NextPage = () => {
         <title>Facebook</title>
       </Head>
       <Header />
-      <main className="flex">
+      <main className="flex bg-gray-100 ">
         <SideBar />
         <Feed />
         <Widgets />

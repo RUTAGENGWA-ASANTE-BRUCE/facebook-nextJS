@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from 'next/Image'
 import React from 'react'
 
 function Contact({src,name}) {

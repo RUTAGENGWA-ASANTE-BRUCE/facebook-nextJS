@@ -11,7 +11,8 @@ function Posts(){
             {posts && posts.map(post=>(<Post
                 key={post.id}
                 name={post.name}
-                message={post.email}
+                email={post.email}
+                message={post.message}
                 timestamp={post.timestamp}
                 image={post.image}
                 postImage={post.postImage}

@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from 'next/Image'
 import React from 'react'
 import {ChatAltIcon,ShareIcon,ThumbUpIcon} from "@heroicons/react/outline"
 function Post({name,message,email,timeStamp,image,postImage}) {

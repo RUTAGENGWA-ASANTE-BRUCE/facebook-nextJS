@@ -1,6 +1,11 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { collection, getFirestore,addDoc } from "firebase/firestore";
+import { collection, getFirestore,addDoc,doc,setDoc,serverTimestamp } from "firebase/firestore";
+import {getStorage,getDownloadURL} from "firebase/storage"
+import firebase from 'firebase/app';
+import {ref,uploadBytes} from "firebase/storage"
+import {v4} from "uuid"
+// import {v4}  from "uuid"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -13,11 +18,26 @@ const firebaseConfig = {
   messagingSenderId: "504847121677",
   appId: "1:504847121677:web:1765debf446d1551efc444"
 };
-
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
 export const database=getFirestore(app)
-const databseRef=collection(database, "post")
-export const addPost=(post)=>{
-    addDoc(databseRef,post)
+const databaseRef=collection(database, "post")
+const storage=getStorage(app)
+export const addPost=(post,postImage)=>{
+    addDoc(databaseRef,{...post,timeStamp:serverTimestamp()}).then(postDoc=>{
+        if(postImage){
+            const imageRef=ref(storage,`images/${postImage.name+v4()}`)
+
+            uploadBytes(imageRef,postImage).then((image)=>{
+                
+                let fieldToUpdate=doc(database,"post",postDoc.id);
+                console.log("Image uploaded successfully")
+                getDownloadURL(ref(storage,image.metadata.fullPath)).then((imageUrl)=>{  
+                    console.log(imageUrl)                  
+                    setDoc(fieldToUpdate,{postImage:imageUrl},{merge:true})
+                })
+            }).catch(err=>console.log(err))
+        }
+    })
+    
 }

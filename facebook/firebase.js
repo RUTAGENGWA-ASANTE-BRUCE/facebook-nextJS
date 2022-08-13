@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { collection, getFirestore,addDoc,doc,setDoc,serverTimestamp } from "firebase/firestore";
+import { collection, getFirestore,addDoc,doc,setDoc,serverTimestamp, getDocs } from "firebase/firestore";
 import {getStorage,getDownloadURL} from "firebase/storage"
 import firebase from 'firebase/app';
 import {ref,uploadBytes} from "firebase/storage"
@@ -21,10 +21,10 @@ const firebaseConfig = {
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
 export const database=getFirestore(app)
-const databaseRef=collection(database, "post")
+const postsRef=collection(database, "post")
 const storage=getStorage(app)
 export const addPost=(post,postImage)=>{
-    addDoc(databaseRef,{...post,timeStamp:serverTimestamp()}).then(postDoc=>{
+    addDoc(postsRef,{...post,timeStamp:serverTimestamp()}).then(postDoc=>{
         if(postImage){
             const imageRef=ref(storage,`images/${postImage.name+v4()}`)
 
@@ -40,4 +40,12 @@ export const addPost=(post,postImage)=>{
         }
     })
     
+}
+
+export const getPosts=async (setPosts)=>{
+    await getDocs(postsRef).then(response=>{
+        setPosts(response.docs.map((data)=>{
+            return {...data.data(),id:data.id}
+        }))
+    })
 }

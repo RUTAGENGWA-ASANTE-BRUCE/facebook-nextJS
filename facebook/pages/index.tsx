@@ -6,6 +6,7 @@ import Login from "../components/Login"
 import Header from "../components/Header"
 import SideBar from "../components/SideBar"
 import Feed from "../components/Feed"
+import Widgets from "../components/Widgets"
 const Home: NextPage = () => {
   const { data: session } = useSession()
   if(!session) return <Login />;
@@ -18,6 +19,7 @@ const Home: NextPage = () => {
       <main className="flex">
         <SideBar />
         <Feed />
+        <Widgets />
       </main>
     </div>
   )

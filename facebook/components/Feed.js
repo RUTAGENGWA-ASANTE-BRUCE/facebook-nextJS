@@ -4,7 +4,7 @@ import InputBox from "./InputBox"
 import Posts from "./Posts"
 function Feed(){
     return(
-    <div className="flex-grow h-screen pt-6 mr-4 xl:mr-40 overflow-y-auto">
+    <div className="flex-grow h-screen xl:ml-52  pt-6 mr-4 xl:mr-52 overflow-y-auto scrollbar-hide">
     <Stories />
     <InputBox />
     <Posts />

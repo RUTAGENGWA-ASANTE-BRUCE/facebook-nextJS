@@ -15,6 +15,7 @@ function InputBox(){
         const post={
             message:inputRef.current.value,
             name:session.user.name,
+            image:session.user.image,
             email:session.user.email,
         }
         

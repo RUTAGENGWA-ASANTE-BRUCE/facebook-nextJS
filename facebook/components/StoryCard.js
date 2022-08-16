@@ -1,6 +1,6 @@
 
 import React from "react"
-import Image from "next/Image"
+import Image from "next/image"
 function StoryCard({name,src,profile}){
     return(
         <div className="hover:scale-95 transition ease-in-out hover:opacity-70 relative h-14 w-14 md:w-20 md:h-20 lg:w-36 lg:h-56 cursor-pointer overflow-x p-3">
